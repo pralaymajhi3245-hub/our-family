@@ -1,0 +1,12 @@
+{
+  "name": "Our Family",
+  "short_name": "Our Family",
+  "description": "A private place for family messages and photos.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f5ef",
+  "theme_color": "#254f3e",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}
+  ]
+}

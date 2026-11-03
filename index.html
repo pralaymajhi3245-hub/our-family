@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#254f3e">
+  <title>Our Family</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">♥</span><div><strong>Our Family</strong><small>A little place for our memories</small></div></div>
+    <button id="logoutBtn" class="quiet hidden">Sign out</button>
+  </header>
+
+  <main class="container">
+    <section id="setupNotice" class="panel notice hidden">
+      <h2>One small setup step</h2>
+      <p>Open <code>app.js</code> and add your Supabase Project URL and Publishable key where it says <code>PASTE_...</code>. Save the file and refresh this page.</p>
+    </section>
+
+    <section id="authView" class="auth-grid">
+      <div class="welcome">
+        <span class="eyebrow">PRIVATE FAMILY SPACE</span>
+        <h1>Our family,<br><em>all in one place.</em></h1>
+        <p>Share family updates and photos, and keep special moments close.</p>
+        <div class="welcome-note">🔒 Only approved family members can see the family space.</div>
+      </div>
+      <div class="panel auth-panel">
+        <div class="tabs">
+          <button id="loginTab" class="tab active">Sign in</button>
+          <button id="signupTab" class="tab">Request access</button>
+        </div>
+        <form id="loginForm">
+          <label>Email address<input id="loginEmail" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+          <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Your password"></label>
+          <button class="primary full" type="submit">Sign in</button>
+        </form>
+        <form id="signupForm" class="hidden">
+          <label>Your full name<input id="signupName" type="text" autocomplete="name" required maxlength="80" placeholder="Your name"></label>
+          <label>Email address<input id="signupEmail" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+          <label>Create a password<input id="signupPassword" type="password" autocomplete="new-password" minlength="8" required placeholder="At least 8 characters"></label>
+          <button class="primary full" type="submit">Request family access</button>
+          <p class="muted small">Your request will remain pending until the family admin approves it.</p>
+        </form>
+        <p id="authMessage" class="message" role="status"></p>
+      </div>
+    </section>
+
+    <section id="pendingView" class="panel pending hidden">
+      <div class="pending-icon">⌛</div><h2>Waiting for approval</h2>
+      <p>Your account has been created. The family admin must approve your access before you can view family messages and photos.</p>
+      <button id="pendingLogoutBtn" class="secondary">Sign out</button>
+    </section>
+
+    <section id="familyView" class="hidden">
+      <div class="family-heading">
+        <div><span class="eyebrow">WELCOME HOME</span><h1>Family moments</h1><p id="helloText" class="muted"></p></div>
+        <span id="rolePill" class="role-pill"></span>
+      </div>
+
+      <section id="adminPanel" class="panel admin-panel hidden">
+        <div class="section-heading"><div><span class="eyebrow">FAMILY ADMIN</span><h2>Member requests</h2></div><span id="pendingCount" class="count">0</span></div>
+        <p class="muted small">Approve people you know. Revoke access to remove someone from the family space.</p>
+        <div id="memberList" class="member-list"></div>
+      </section>
+
+      <section id="composePanel" class="panel compose hidden">
+        <span class="eyebrow">ONLY THE ADMIN CAN POST</span>
+        <h2>Share something with the family</h2>
+        <form id="postForm">
+          <label class="sr-only" for="postText">Write a family message</label>
+          <textarea id="postText" rows="3" maxlength="5000" placeholder="Write a family update or a little memory..."></textarea>
+          <div class="compose-bottom">
+            <label class="file-label">＋ Add a photo<input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp"></label>
+            <span id="photoName" class="muted small"></span>
+            <button class="primary" type="submit">Share with family</button>
+          </div>
+          <p class="muted tiny">Photos must be JPG, PNG or WebP and no larger than 5 MB.</p>
+        </form>
+        <p id="postMessage" class="message" role="status"></p>
+      </section>
+
+      <div class="feed-heading"><h2>Family board</h2><button id="refreshBtn" class="quiet">↻ Refresh</button></div>
+      <div id="feed" class="feed"><div class="empty">Loading family moments…</div></div>
+    </section>
+  </main>
+  <footer>Made with love · Our Family</footer>
+  <script src="app.js"></script>
+</body>
+</html>
